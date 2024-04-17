@@ -9,8 +9,6 @@ public class BibleApiApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(BibleApiApplication.class, args);
-
-		Language language = new Language();
 	}
 
 }

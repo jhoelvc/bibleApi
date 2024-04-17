@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PersonService implements IPersonService{
@@ -15,7 +16,15 @@ public class PersonService implements IPersonService{
 
     @Override
     public Person create(PersonDTO personDTO) {
-        return null;
+        Person person = Person.builder()
+                .code(personDTO.getCode())
+                .name(personDTO.getName())
+                .identityDocumentNumber(personDTO.getIdentityDocumentNumber())
+                .contactNumber(personDTO.getContactNumber())
+                .personType(personDTO.getPersonType())
+                .identityDocumentType(personDTO.getIdentityDocumentType())
+                .build();
+        return personRepository.save(person);
     }
 
     @Override
@@ -33,7 +42,8 @@ public class PersonService implements IPersonService{
 
     @Override
     public Person findById(Integer code) {
-        return null;
+        Optional<Person> servicesOptional = personRepository.findById(code);
+        return servicesOptional.orElse(null);
     }
 
     @Override
@@ -43,6 +53,6 @@ public class PersonService implements IPersonService{
 
     @Override
     public void delete(Integer code) {
-
+        personRepository.deleteById(code);
     }
 }
