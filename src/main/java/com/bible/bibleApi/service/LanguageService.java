@@ -24,18 +24,18 @@ public class LanguageService implements ILanguageService {
     }
 
     @Override
-    public Language findById(Integer id) {
-        Optional<Language> languageOptional = languageRepository.findById(id);
+    public Language findById(Integer code) {
+        Optional<Language> languageOptional = languageRepository.findById(code);
         return languageOptional.orElse(null);
     }
 
     @Override
     public List<Language> findAll() {
-        return languageRepository.findAll();
+        return (List<Language>) languageRepository.findAll();
     }
 
     @Override
-    public void delete(Integer id) {
-        languageRepository.deleteById(id);
+    public void delete(Integer code) {
+        languageRepository.deleteById(code);
     }
 }
