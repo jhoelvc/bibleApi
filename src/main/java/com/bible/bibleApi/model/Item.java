@@ -1,13 +1,17 @@
 package com.bible.bibleApi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
+import java.util.List;
 
-@Getter
-@Setter
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
+@Builder
 @Entity
 @Table(name = "item")
 public class Item {
@@ -18,4 +22,9 @@ public class Item {
     private String name;
     @Column(name = "price", nullable = false, precision = 14, scale = 6, columnDefinition="DECIMAL(14,6)")
     private BigDecimal price;
+
+    @Getter
+    @OneToMany(mappedBy = "item", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<ItemPackageDetail> itemPackageDetails;
 }

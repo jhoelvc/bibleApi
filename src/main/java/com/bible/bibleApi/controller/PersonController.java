@@ -75,7 +75,7 @@ public class PersonController {
             person.setIdentityDocumentNumber(personDTO.getIdentityDocumentNumber());
             person.setContactNumber(personDTO.getContactNumber());
 
-            return ResponseEntity.ok(personService.create(person));
+            return ResponseEntity.ok(personService.update(person));
         }
         return ResponseEntity.notFound().build();
     }
