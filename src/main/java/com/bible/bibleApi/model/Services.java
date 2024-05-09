@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.*;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,8 +21,18 @@ public class Services {
     private String name;
     @Column(name = "service_code_dependency")
     private Integer serviceCodeDependency;
+
     @ManyToOne
     @JoinColumn(name = "service_type_code", nullable = false)
     @JsonIgnore
     private ServiceType serviceType;
+
+    @Getter
+    @OneToMany(mappedBy = "services", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<PackageDetail> packageDetails;
+    @Getter
+    @OneToMany(mappedBy = "services", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<FileDetail> files;
 }

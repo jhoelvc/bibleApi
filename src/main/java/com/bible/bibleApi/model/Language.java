@@ -1,7 +1,10 @@
 package com.bible.bibleApi.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -16,4 +19,9 @@ public class Language {
     private Integer code;
     @Column(name = "name", nullable = false, length = 100)
     private String name;
+
+    @Getter
+    @OneToMany(mappedBy = "language", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<File> files;
 }

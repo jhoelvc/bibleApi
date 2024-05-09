@@ -5,7 +5,6 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -13,24 +12,24 @@ import java.util.List;
 @ToString
 @Builder
 @Entity
-@Table(name = "tariff")
-public class Tariff {
+@Table(name = "package_detail")
+public class PackageDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer code;
-    @Column(name = "price", nullable = false, precision = 14, scale = 6)
+    @Column(name = "price", nullable = false, precision = 14, scale = 6, columnDefinition = "DECIMAL(14,6)")
     private BigDecimal price;
+
+    @ManyToOne
+    @JoinColumn(name = "package_code")
+    @JsonIgnore
+    private Package apackage;
     @ManyToOne
     @JoinColumn(name = "service_code")
     @JsonIgnore
-    private Services service;
+    private Services services;
     @ManyToOne
-    @JoinColumn(name = "person_code")
+    @JoinColumn(name = "tariff_code")
     @JsonIgnore
-    private Person person;
-
-    @Getter
-    @OneToMany(mappedBy = "tariff", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JsonIgnore
-    private List<PackageDetail> packageDetails;
+    private Tariff tariff;
 }

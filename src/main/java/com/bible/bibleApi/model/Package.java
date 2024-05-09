@@ -22,4 +22,12 @@ public class Package {
     @OneToMany(mappedBy = "apackage", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JsonIgnore
     private List<ItemPackageDetail> itemPackageDetails;
+    @Getter
+    @OneToMany(mappedBy = "apackage", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<PackageDetail> packageDetails;
+    @Getter
+    @OneToMany(mappedBy = "apackage", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<FileDetail> fileDetails;
 }

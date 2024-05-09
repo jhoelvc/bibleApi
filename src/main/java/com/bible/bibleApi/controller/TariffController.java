@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/tariff")
+@RequestMapping("/v1/api/tariff")
 public class TariffController {
     @Autowired
     private ITariffService tariffService;
@@ -26,6 +26,7 @@ public class TariffController {
                         .service(tariff.getService())
                         .person(tariff.getPerson())
                         .price(tariff.getPrice())
+                        .packageDetails(tariff.getPackageDetails())
                         .build())
                 .toList();
 
